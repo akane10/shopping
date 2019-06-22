@@ -1,3 +1,5 @@
+import Data.List
+
 shoppingList :: [String]
 shoppingList = 
   [
@@ -11,12 +13,15 @@ shoppingList =
 
 main :: IO()
 main = putStrLn ("there are "
-                ++ (show (length shoppingList))
+                ++ (show $ length shoppingList)
                 ++ " items on shopping list."
                 ++ " and the list is : "
-                ++ joinWithCommas shoppingList)
+                ++ joinWithCommas' shoppingList)
 
-joinWithCommas :: [String] -> String
-joinWithCommas [] = ""
-joinWithCommas [x] = x
-joinWithCommas (x:xs) = x ++ ", " ++ joinWithCommas xs
+-- joinWithCommas :: [String] -> String
+-- joinWithCommas [] = ""
+-- joinWithCommas [x] = x
+-- joinWithCommas (x:xs) = x ++ ", " ++ joinWithCommas xs
+
+joinWithCommas' :: [String] -> String
+joinWithCommas' = intercalate ", "
