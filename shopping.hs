@@ -12,11 +12,11 @@ shoppingList =
   ]
 
 showList' :: [String] -> String
-showList' list = ("there are "
-                  ++ (show $ length list)
-                  ++ " items on shopping list."
-                  ++ " and the list is : "
-                  ++ joinWithCommas' list)
+showList' list = "there are "
+                 ++ (show . length $ list)
+                 ++ " items on shopping list."
+                 ++ " and the list is : "
+                 ++ joinWithCommas' list
 
 add :: String -> [String]
 add item = item : shoppingList
