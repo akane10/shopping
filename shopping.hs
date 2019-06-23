@@ -13,27 +13,33 @@ shoppingList =
 
 showList' :: [String] -> String
 showList' list = "there are "
-                 ++ (show . length $ list)
+                 ++ (show . length) list
                  ++ " items on shopping list."
                  ++ " and the list is : "
                  ++ joinWithCommas' list
 
-add :: String -> [String]
-add item = item : shoppingList
+addItemToList :: String -> [String] -> [String]
+addItemToList item list = item : list
+
+deleteItemFromList :: String -> [String] -> [String]
+deleteItemFromList item = filter (/= item)
 
 main :: IO()
 main = do 
    putStrLn $ showList' shoppingList
    putStrLn "type 'add' to a new item"
+   putStrLn "type 'delete' to delete an item"
    putStrLn "type 'exit' to exit"
    command <- getLine
    case command of
      "add" -> do
         putStrLn "what is it?"
         item <- getLine
-        let added = add item
-        putStrLn "your list is now"
-        putStrLn $ showList' added
+        putStrLn $ showList' $ addItemToList item shoppingList
+     "delete" -> do
+        putStrLn "what do you want to delete?"
+        item <- getLine
+        putStrLn $ showList' $ deleteItemFromList item shoppingList
      "exit" ->
         putStrLn "bye"
      _ -> 
